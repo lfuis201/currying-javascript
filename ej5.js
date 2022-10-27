@@ -1,16 +1,18 @@
-//Implemente una funci ́on delayInvoc que en cada invocaci ́on incremente la variable total con el
+//Implemente una funci ́on delayInvoc que en cada invocacion incremente la variable total con el
 //valor enviado como parametro.
+let total = 0;
 
-var total = 0;
 function delayInvoc(...args) {
-    const result = args.reduce((total,v) => total+v,0);
+    let result= args.reduce((r,v)=> r+v);
+
     const sum = (...innerargs)=>{
-        if(innerargs.length===0) return result;
-        return delayInvoc(...args, innerargs)
+        if (innerargs.length === 0) return result;
+        return delayInvoc(...args, ...innerargs)
     }
     return sum;
 };
+
 let total1 = delayInvoc(4)(5)();
-console.log ( total1 ); //9
-let total2 = delayInvoc(4)(5)(8)();
-console.log ( total2 ); // 26
+console.log ( total1); //9
+total1 = delayInvoc(4)(5)(8)();
+console.log ( total1 ); // 26
